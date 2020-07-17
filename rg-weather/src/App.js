@@ -1,12 +1,28 @@
-import React from 'react';
-import Header from './components/Header'
+import React, { Component } from 'react';
+import Header from './components/Header';
+import Main from './components/Main';
+import Secondpage from './components/SecondPage';
 
-function App() {
-  return (
-    <div className="App">
-      <Header></Header>
-    </div>
-  );
+export class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+       name : ""
+    }
+    this.setState({name:"gharam"});
+  }
+ 
+
+  render() {
+    return (
+      <div>
+        <Header/> 
+        <Main/>
+        <Secondpage/>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
