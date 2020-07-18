@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
-//import Secondpage from './components/SecondPage';
+// import Secondpage from './components/SecondPage';
 // import Table from './components/Table'
 export class App extends Component {
 

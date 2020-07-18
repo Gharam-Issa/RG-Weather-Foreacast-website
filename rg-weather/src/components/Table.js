@@ -36,14 +36,14 @@ export class Table extends Component {
 
     render() {
         
-        var temp  = this.props.data;
-        console.log("temp data is:" ,temp.list[0])
+        //var temp  = this.props.data;
+        
         return (
             <div className="grid-block">
                 <div className="block">
                     <div className="dayName" id="today">Today</div>
                     <div className="info" id="todayInfo">
-                        <img className="statusImage" id="todayImage" src={temp.list} alt="Weather Status" />
+                        <img className="statusImage" id="todayImage" src={this.state.todayStatus} alt="Weather Status" />
                         <h1 className='temp' id="todayTemp"> {this.state.todayTemp} </h1>
                     </div>
                 </div>
