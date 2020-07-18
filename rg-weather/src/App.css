@@ -1,38 +1,112 @@
-.App {
-  text-align: center;
+.main{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-gap:3px;
+    justify-items: center;
+}
+.main-text{
+color:#246D3F;
+margin: 4px;
+padding:0px;
+text-align: center;
+font-family: 'Segoe UI';
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.temp{
+    color:#246D3F;
+    margin: 4px;
+    padding:0px;
+    text-align: center;
+    font-family: 'Segoe UI';
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#name{
+    
+    font-size: 80px;
+    padding-top: 0px;
+    margin-top:0px;
+}
+#date{
+    font-size: 20px;
+    margin: 0px
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.temperatures{
+
+display: grid;
+grid-template-columns: auto auto;
+}
+#maxTemp{
+    font-size: 100px;
+     width: fit-content;
+     padding-left: 40%;
+}
+#minTemp{
+    font-size: 36px;
+    width: fit-content;
+    padding-right: 60%;
+    padding-top: 45%;
+}
+#feels{
+    font-size: 20px;
+}
+#middleDiv{
+    top:30%;
+    vertical-align: middle;
+    position: relative;
+}
+#info{
+padding-top: 60px;
+
+}
+#info h3{
+text-align: left;
+margin: 20px;
+}
+form{
+    padding-top: 20px;
+}
+#statusImage{
+    
+    width: 150px;
+    height: auto;
+
 }
 
-.App-link {
-  color: #61dafb;
+#searchBtn{
+    text-decoration: none;
+    cursor: pointer;
+    
+
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+/*---------------------------------*/
+.bottom-table{
+    margin: 0px;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+#today{
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+   
+    background-color: #246D3F;
+    color:white;
+}
+.bottom-table h2{
+    border: 1px grey solid;
+}
+.day{
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+   
+    background-color: lightgrey;
+    color:#246D3F;
+
 }
