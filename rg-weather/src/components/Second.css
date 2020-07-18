@@ -1,4 +1,5 @@
 .second{
+    position: relative;
     text-align: center;
 
 }
@@ -58,3 +59,12 @@ padding-right: 100px;
     color: #246D3F;
     margin: 20px 0px;
 }
+
+#back{
+    width: 50px;
+    position: absolute;
+    left: 40px;
+    top:10px;
+    cursor: pointer;
+}
+
