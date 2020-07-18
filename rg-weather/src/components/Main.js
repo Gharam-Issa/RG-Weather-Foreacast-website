@@ -27,7 +27,10 @@ export class Main extends Component {
 
             statusImage: `${require('../assets/01d.png')}`,
 
-            tempName:""
+            tempName:"",
+
+            lon: "31.55",
+            lat : "31.65"
         }
 
 
@@ -85,6 +88,35 @@ export class Main extends Component {
 
 
 
+    }
+
+    componentDidMount(){
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition((position) => {
+                this.setState({ 
+                    lon : position.coords.longitude,
+                    lat: position.coords.latitude
+                })
+            })
+         axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
+        .then(resp => {
+            this.setState({
+                maxTemp: `${Math.round(resp.data.main.temp_max)}°`,
+                minTemp: `${Math.round(resp.data.main.temp_min)}°`,
+                feels : resp.data.main.feels_like,
+                status : resp.data.weather[0].main,
+                date: this.convert(resp.data.dt),
+                windSpeed : `${resp.data.wind.speed} km/h`,
+                humidity : ` ${resp.data.main.humidity} %`,
+                pressure: resp.data.main.pressure,
+
+            })
+        })
+
+        } 
+        else {
+            console.error("Error")
+        }
     }
 
     render() {
