@@ -10,7 +10,7 @@ export class Main extends Component {
         super(props)
         this.state = {
             name: "Bethlehem",
-            date: "Wed 15/7-2020",
+            date: "Wed 15/7/2020",
             maxTemp: '20°',
             minTemp: "19°",
             feels: "19.5°",
@@ -23,39 +23,69 @@ export class Main extends Component {
 
             nextDay: "Thu",
             dayAfter: "Fri",
-            lastDay: "Sat"
+            lastDay: "Sat",
 
+            statusImage: `${require('../assets/01d.png')}`,
+
+            tempName:""
         }
 
 
     }
     onChange = (e) => {
         this.setState({
-            name: e.target.value
+            tempName: e.target.value
         });
     }
 
     submit = (e) => {
         e.preventDefault();
         //Call API
-        console.log("Submit code")
         axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.name}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
-        .then(resp => {
-            this.setState({
-                maxTemp: `${Math.round(resp.data.main.temp_max)}°`,
-                minTemp: `${Math.round(resp.data.main.temp_min)}°`,
-                feels : resp.data.main.feels_like,
-                status : resp.data.weather.main,
-                date : resp.data.main.dt,
-                windSpeed : `${resp.data.wind.speed} km/h`,
-                humidity : ` ${resp.data.main.humidity} %`,
-                pressure: resp.data.main.pressure,
+            .then(resp => {
 
+                this.setState({
+                    maxTemp: `${Math.round(resp.data.main.temp_max)}°`,
+                    minTemp: `${Math.round(resp.data.main.temp_min)}°`,
+                    feels: `${Math.round(resp.data.main.feels_like)}°`,
+                    status: `${resp.data.weather[0].main}`,
+                    date: this.convert(resp.data.dt),
+                    windSpeed: `${resp.data.wind.speed} km/h`,
+                    humidity: ` ${resp.data.main.humidity} %`,
+                    pressure: resp.data.main.pressure,
+                    statusImage: `${require(`../assets/${resp.data.weather[0].icon}.png`)}`,
+                    name: this.state.tempName,
+                })
             })
-        })
 
     }
-     
+
+    convert = (unix) => {
+        var date = new Date(unix * 1000);
+        console.log(date);
+        var weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+
+        var day = weekday[date.getDay()];
+        day = day.substring(0,3);
+
+        var month = date.getMonth()+1;
+        var year = date.getFullYear();
+        var dayOfMonth = date.getDate();
+
+        var format = `${day} ${dayOfMonth}/${month}/${year}`;
+
+        return format;
+
+
+
+    }
 
     render() {
         return (
@@ -73,7 +103,7 @@ export class Main extends Component {
                 </div>
 
                 <div id="middleDiv">
-                    <img id="statusImage" src={statusImage} alt="Weather Status" />
+                    <img id="statusImage" src={this.state.statusImage} alt="Weather Status" />
                     <h1 className='main-text'> {this.state.status} </h1>
                 </div>
 
@@ -91,7 +121,7 @@ export class Main extends Component {
                         <h3 className='main-text'>Wind Speed: {this.state.windSpeed} </h3>
                         <h3 className='main-text'>Humidity:         {this.state.humidity} </h3>
                         <h3 className='main-text'>{"Pressure: " + this.state.pressure} </h3>
-                        
+
                     </div>
 
                 </div>
@@ -107,6 +137,8 @@ export class Main extends Component {
 
 }
 
-var statusImage = require('../assets/sun.png');
+
+
+
 
 export default Main
