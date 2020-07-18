@@ -1,0 +1,45 @@
+.grid-block{
+    height: 100px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+}
+
+    .block{
+       height: 150px;
+       
+
+    }
+
+.dayName{
+    font-size:24px ;
+    font-weight: bold;
+    border: 1px grey solid;
+    background-color: lightgrey;
+    color: #246D3F;
+    height:  43px;
+}
+#today{
+    background-color: #246D3F;
+    color: white;
+    height:  43px;
+}
+
+    .info{
+        border: 1px grey solid;
+        background-color: lightgrey;
+
+    }
+    #todayInfo{
+        background-color: #246D3F;
+    }
+
+.statusImage{
+   margin: 5px;
+    width:auto;
+    height: 100px;
+
+}
+#todayTemp{
+    color:white;
+}

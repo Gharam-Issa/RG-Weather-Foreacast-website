@@ -82,31 +82,3 @@ form{
 
 }
 
-
-/*---------------------------------*/
-.bottom-table{
-    margin: 0px;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-}
-
-#today{
-    text-align: center;
-    padding: 0px;
-    margin: 0px;
-   
-    background-color: #246D3F;
-    color:white;
-}
-.bottom-table h2{
-    border: 1px grey solid;
-}
-.day{
-    text-align: center;
-    padding: 0px;
-    margin: 0px;
-   
-    background-color: lightgrey;
-    color:#246D3F;
-
-}
