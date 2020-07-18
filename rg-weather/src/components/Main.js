@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import '../App.css';
+
+import axios from 'axios';
+
+
 export class Main extends Component {
 
     constructor(props) {
@@ -32,13 +36,20 @@ export class Main extends Component {
     }
 
     submit = (e) => {
-        //Call API
         e.preventDefault();
-        console.log(this.state.value);
+        //Call API
+        console.log("Submit code")
+        axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.name}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
+        .then(resp => {
+            this.setState({
+                maxTemp: `${resp.data.main.temp_max}°`,
+                minTemp: `${resp.data.main.min}°`
+
+            })
+        })
 
     }
-
-
+    
 
     render() {
         return (
@@ -61,21 +72,20 @@ export class Main extends Component {
                 </div>
 
                 <div >
-                    <form>
+                    <form onSubmit={this.submit}>
 
                         <input type="search" placeholder="Look for your country..." onChange={this.onChange}
 
                         ></input>
-                        <input id="searchBtn" type="submit" value="Search" onClick={this.submit}></input>
+                        <input id="searchBtn" type="submit" value="Search" ></input>
 
                     </form>
                     <div id="info">
 
                         <h3 className='main-text'>Wind Speed: {this.state.windSpeed} </h3>
-
                         <h3 className='main-text'>Humidity:         {this.state.humidity} </h3>
-
                         <h3 className='main-text'>{"UV Index: " + this.state.uvIndex} </h3>
+                        
                     </div>
 
                 </div>
