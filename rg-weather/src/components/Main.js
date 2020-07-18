@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../App.css';
-
+import Table from './Table'
+import './Table.css'
 import axios from 'axios';
 
 
@@ -9,6 +10,7 @@ export class Main extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            jsonData: {},
             name: "Bethlehem",
             date: "Wed 15/7/2020",
             maxTemp: '20°',
@@ -27,10 +29,10 @@ export class Main extends Component {
 
             statusImage: `${require('../assets/01d.png')}`,
 
-            tempName:"",
+            tempName: "",
 
             lon: "31.55",
-            lat : "31.65"
+            lat: "31.65"
         }
 
 
@@ -44,20 +46,21 @@ export class Main extends Component {
     submit = (e) => {
         e.preventDefault();
         //Call API
-        axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.name}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
+        axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${this.state.name}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
             .then(resp => {
 
                 this.setState({
-                    maxTemp: `${Math.round(resp.data.main.temp_max)}°`,
-                    minTemp: `${Math.round(resp.data.main.temp_min)}°`,
-                    feels: `${Math.round(resp.data.main.feels_like)}°`,
-                    status: `${resp.data.weather[0].main}`,
-                    date: this.convert(resp.data.dt),
-                    windSpeed: `${resp.data.wind.speed} km/h`,
-                    humidity: ` ${resp.data.main.humidity} %`,
-                    pressure: resp.data.main.pressure,
-                    statusImage: `${require(`../assets/${resp.data.weather[0].icon}.png`)}`,
+                    maxTemp: `${Math.round(resp.data.list[0].main.temp_max)}°`,
+                    minTemp: `${Math.round(resp.data.list[0].main.temp_min)}°`,
+                    feels: `${Math.round(resp.data.list[0].main.feels_like)}°`,
+                    status: `${resp.data.list[0].weather[0].main}`,
+                    date: this.convert(resp.data.list[0].dt),
+                    windSpeed: `${resp.data.list[0].wind.speed} km/h`,
+                    humidity: ` ${resp.data.list[0].main.humidity} %`,
+                    pressure: resp.data.list[0].main.pressure,
+                    statusImage: `${require(`../assets/${resp.data.list[0].weather[0].icon}.png`)}`,
                     name: this.state.tempName,
+                    jsonData: resp.data,
                 })
             })
 
@@ -76,9 +79,9 @@ export class Main extends Component {
         weekday[6] = "Saturday";
 
         var day = weekday[date.getDay()];
-        day = day.substring(0,3);
+        day = day.substring(0, 3);
 
-        var month = date.getMonth()+1;
+        var month = date.getMonth() + 1;
         var year = date.getFullYear();
         var dayOfMonth = date.getDate();
 
@@ -90,30 +93,30 @@ export class Main extends Component {
 
     }
 
-    componentDidMount(){
-        if(navigator.geolocation){
+    componentDidMount() {
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
-                this.setState({ 
-                    lon : position.coords.longitude,
+                this.setState({
+                    lon: position.coords.longitude,
                     lat: position.coords.latitude
                 })
             })
-         axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
-        .then(resp => {
-            this.setState({
-                maxTemp: `${Math.round(resp.data.main.temp_max)}°`,
-                minTemp: `${Math.round(resp.data.main.temp_min)}°`,
-                feels : resp.data.main.feels_like,
-                status : resp.data.weather[0].main,
-                date: this.convert(resp.data.dt),
-                windSpeed : `${resp.data.wind.speed} km/h`,
-                humidity : ` ${resp.data.main.humidity} %`,
-                pressure: resp.data.main.pressure,
+            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${this.state.lat}&lon=${this.state.lon}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
+                .then(resp => {
+                    this.setState({
+                        maxTemp: `${Math.round(resp.data.list[0].main.temp_max)}°`,
+                        minTemp: `${Math.round(resp.data.list[0].main.temp_min)}°`,
+                        feels: resp.data.list[0].main.feels_like,
+                        status: resp.data.list[0].weather[0].main,
+                        date: this.convert(resp.data.list[0].dt),
+                        windSpeed: `${resp.data.list[0].wind.speed} km/h`,
+                        humidity: ` ${resp.data.list[0].main.humidity} %`,
+                        pressure: resp.data.list[0].main.pressure,
+                        jsonData: resp.data,
+                    })
+                })
 
-            })
-        })
-
-        } 
+        }
         else {
             console.error("Error")
         }
@@ -121,44 +124,48 @@ export class Main extends Component {
 
     render() {
         return (
+            <React.Fragment>
+                <div className="main" >
+                    <div>
+                        <h1 className='main-text' id="name" >{this.state.name}</h1>
+                        <h5 className='main-text' id="date"> {this.state.date} </h5>
+                        <div className="temperatures">
+                            <h1 className='temp' id="maxTemp">{this.state.maxTemp}</h1>
+                            <h2 className='temp' id="minTemp">{this.state.minTemp}</h2>
+                        </div>
 
-            <div className="main" >
-                <div>
-                    <h1 className='main-text' id="name" >{this.state.name}</h1>
-                    <h5 className='main-text' id="date"> {this.state.date} </h5>
-                    <div className="temperatures">
-                        <h1 className='temp' id="maxTemp">{this.state.maxTemp}</h1>
-                        <h2 className='temp' id="minTemp">{this.state.minTemp}</h2>
+                        <h5 className='temp' id="feels">Feels Like: {this.state.feels}</h5>
                     </div>
 
-                    <h5 className='temp' id="feels">Feels Like: {this.state.feels}</h5>
-                </div>
+                    <div id="middleDiv">
+                        <img id="statusImage" src={this.state.statusImage} alt="Weather Status" />
+                        <h1 className='main-text'> {this.state.status} </h1>
+                    </div>
 
-                <div id="middleDiv">
-                    <img id="statusImage" src={this.state.statusImage} alt="Weather Status" />
-                    <h1 className='main-text'> {this.state.status} </h1>
-                </div>
+                    <div >
+                        <form onSubmit={this.submit}>
 
-                <div >
-                    <form onSubmit={this.submit}>
+                            <input type="search" placeholder="Look for your country..." onChange={this.onChange}
 
-                        <input type="search" placeholder="Look for your country..." onChange={this.onChange}
+                            ></input>
+                            <input id="searchBtn" type="submit" value="Search" ></input>
 
-                        ></input>
-                        <input id="searchBtn" type="submit" value="Search" ></input>
+                        </form>
+                        <div id="info">
 
-                    </form>
-                    <div id="info">
+                            <h3 className='main-text'>Wind Speed: {this.state.windSpeed} </h3>
+                            <h3 className='main-text'>Humidity:         {this.state.humidity} </h3>
+                            <h3 className='main-text'>{"Pressure: " + this.state.pressure} </h3>
 
-                        <h3 className='main-text'>Wind Speed: {this.state.windSpeed} </h3>
-                        <h3 className='main-text'>Humidity:         {this.state.humidity} </h3>
-                        <h3 className='main-text'>{"Pressure: " + this.state.pressure} </h3>
+                        </div>
 
                     </div>
 
                 </div>
 
-            </div>
+                <Table data={this.state.jsonData}/>
+
+            </React.Fragment>
 
 
 
