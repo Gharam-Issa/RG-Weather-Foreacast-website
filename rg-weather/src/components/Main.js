@@ -19,7 +19,7 @@ export class Main extends Component {
 
             windSpeed: "17 km/h",
             humidity: "29%",
-            uvIndex: "1",
+            pressure: "1",
 
             nextDay: "Thu",
             dayAfter: "Fri",
@@ -42,14 +42,20 @@ export class Main extends Component {
         axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.name}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
         .then(resp => {
             this.setState({
-                maxTemp: `${resp.data.main.temp_max}°`,
-                minTemp: `${resp.data.main.min}°`
+                maxTemp: `${Math.round(resp.data.main.temp_max)}°`,
+                minTemp: `${Math.round(resp.data.main.temp_min)}°`,
+                feels : resp.data.main.feels_like,
+                status : resp.data.weather.main,
+                date : resp.data.main.dt,
+                windSpeed : `${resp.data.wind.speed} km/h`,
+                humidity : ` ${resp.data.main.humidity} %`,
+                pressure: resp.data.main.pressure,
 
             })
         })
 
     }
-    
+     
 
     render() {
         return (
@@ -84,7 +90,7 @@ export class Main extends Component {
 
                         <h3 className='main-text'>Wind Speed: {this.state.windSpeed} </h3>
                         <h3 className='main-text'>Humidity:         {this.state.humidity} </h3>
-                        <h3 className='main-text'>{"UV Index: " + this.state.uvIndex} </h3>
+                        <h3 className='main-text'>{"Pressure: " + this.state.pressure} </h3>
                         
                     </div>
 
