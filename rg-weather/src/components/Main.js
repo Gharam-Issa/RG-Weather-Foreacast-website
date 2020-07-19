@@ -3,7 +3,7 @@ import '../App.css';
 import Table from './Table'
 import './Table.css'
 import axios from 'axios';
-import SecondPage from './SecondPage'
+
 
 export class Main extends Component {
 
@@ -165,8 +165,8 @@ export class Main extends Component {
                 <div style={{
                     height: '20px'
                 }}></div>
-                <Table data={this.state.jsonData}/>
-                <SecondPage/>
+                <Table data={this.state.jsonData} convert ={this.convert}/>
+               
 
                 
             </React.Fragment>

@@ -1,92 +1,70 @@
-import React, { Component } from 'react'
-import './Table.css'
+import React, { Component } from 'react';
+import './Table.css';
+import {Link} from 'react-router-dom';
+ 
+
 
 
 
 export class Table extends Component {
     
-    constructor(props) {
-        super(props)
-        this.state = {
-            today: "Today",
-            todayStatus: `${require(`../assets/01d.png`)}`,
-            todayTemp: "24°",
-
-            secondDay: "TMP",
-            thirdDay: "TMP",
-            fourthDay: "TMP",
-            fifthDay: "TMP",
-            sixthDay: "TMP",
-
-            secondStatus: `${require(`../assets/01d.png`)}`,
-            thirdStatus: `${require(`../assets/01d.png`)}`,
-            fourthStatus: `${require(`../assets/01d.png`)}`,
-            fifthStatus: `${require(`../assets/01d.png`)}`,
-            sixthStatus: `${require(`../assets/01d.png`)}`,
-
-            secondTemp: "24°",
-            thirdTemp: "24°",
-            fourthTemp: "24°",
-            fifthTemp: "24°",
-            sixthTemp: "24°",
-
-        }
-    }
+        
+    
     
 
     render() {
         
         //var temp  = this.props.data;
-        
+        if(!this.props.data.list){
+            return <span>Loading ...</span> 
+        }
         return (
+            <React.Fragment>
             <div className="grid-block">
+                {/* <Link to="/SecondPage"> */}
                 <div className="block">
                     <div className="dayName" id="today">Today</div>
                     <div className="info" id="todayInfo">
-                        <img className="statusImage" id="todayImage" src={this.state.todayStatus} alt="Weather Status" />
-                        <h1 className='temp' id="todayTemp"> {this.state.todayTemp} </h1>
+                        <img className="statusImage" id="todayImage" src={`${require(`../assets/${this.props.data.list[0].weather[0].icon}.png`)}`} alt="Weather Status" />
+                        <h1 className='temp' id="todayTemp"> {Math.round(this.props.data.list[0].main.temp)}° </h1>
                     </div>
                 </div>
+                {/* </Link> */}
 
                 <div className="block">
-                    <div className="dayName">{this.state.secondDay}</div>
+                    <div className="dayName">{this.props.convert(this.props.data.list[8].dt)}</div>
                     <div className="info">
-                        <img className="statusImage" src={this.state.secondStatus} alt="Weather Status" />
-                        <h1 className='temp'> {this.state.secondTemp} </h1>
+                        <img className="statusImage" src={`${require(`../assets/${this.props.data.list[8].weather[0].icon}.png`)}`} alt="Weather Status" />
+                        <h1 className='temp'> {Math.round(this.props.data.list[8].main.temp)}° </h1>
                     </div>
                 </div>
                 <div className="block">
-                    <div className="dayName">{this.state.thirdDay}</div>
+                    <div className="dayName">{this.props.convert(this.props.data.list[16].dt)}</div>
                     <div className="info">
-                        <img className="statusImage" src={this.state.thirdStatus} alt="Weather Status" />
-                        <h1 className='temp'> {this.state.thirdTemp} </h1>
+                        <img className="statusImage" src={`${require(`../assets/${this.props.data.list[16].weather[0].icon}.png`)}`} alt="Weather Status" />
+                        <h1 className='temp'> {Math.round(this.props.data.list[16].main.temp)}° </h1>
                     </div>
                 </div>
                 <div className="block">
-                    <div className="dayName">{this.state.fourthDay}</div>
+                    <div className="dayName">{this.props.convert(this.props.data.list[24].dt)}</div>
                     <div className="info">
-                        <img className="statusImage" src={this.state.fourthStatus} alt="Weather Status" />
-                        <h1 className='temp'> {this.state.fourthTemp} </h1>
+                        <img className="statusImage" src={`${require(`../assets/${this.props.data.list[24].weather[0].icon}.png`)}`} alt="Weather Status" />
+                        <h1 className='temp'> {Math.round(this.props.data.list[24].main.temp)}° </h1>
                     </div>
                 </div>
                 <div className="block">
-                    <div className="dayName">{this.state.fifthDay}</div>
+                    <div className="dayName">{this.props.convert(this.props.data.list[32].dt)}</div>
                     <div className="info">
-                        <img className="statusImage" src={this.state.fifthStatus} alt="Weather Status" />
-                        <h1 className='temp'> {this.state.fifthTemp} </h1>
+                        <img className="statusImage" src={`${require(`../assets/${this.props.data.list[32].weather[0].icon}.png`)}`} alt="Weather Status" />
+                        <h1 className='temp'> {Math.round(this.props.data.list[32].main.temp)}° </h1>
                     </div>
                 </div>
-                <div className="block">
-                    <div className="dayName">{this.state.sixthDay}</div>
-                    <div className="info">
-                        <img className="statusImage" src={this.state.sixthStatus} alt="Weather Status" />
-                        <h1 className='temp'> {this.state.sixthTemp} </h1>
-                    </div>
-                </div>
+    
 
             </div>
+            </React.Fragment>
         )
     }
 }
 
-export default Table
+export default Table;

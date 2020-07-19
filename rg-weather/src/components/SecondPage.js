@@ -26,9 +26,10 @@ export class SecondPage extends Component {
     }
     render() {
         return (
+            <React.Fragment>
             <div className="second">
                 <img id="back" src={require('../assets/back.png')} alt="sun" onClick={this.handleClick}/>
-
+            
                 <h1 className="text" id="day">{this.state.day}</h1>
 
                 <h3 className="text3" id="date">{this.state.date}</h3>
@@ -60,6 +61,7 @@ export class SecondPage extends Component {
 
                 </div>
             </div>
+            </React.Fragment>
         )
     }
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
-// import Secondpage from './components/SecondPage';
+import SecondPage from './components/SecondPage';
 // import Table from './components/Table'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 export class App extends Component {
 
   constructor(props) {
@@ -17,9 +18,8 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <Header/> 
-        <Main/>
-        
+      <Header/>
+      <Main/>
       </div>
     )
   }
