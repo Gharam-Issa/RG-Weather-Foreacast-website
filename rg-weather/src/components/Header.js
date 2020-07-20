@@ -18,16 +18,16 @@ const headerStyle ={
     color:'#fff',
     opacity: 0.75,
     textAlign: 'center',
-    height: '80px',
+    height: '75px',
     fontSize: '40px',
-    paddingTop: '20px'
+    paddingTop: '10px'
     
 }
 
 const logoStyle ={
 
     //width: '100%',
-    height: '100px',
+    height: '85px',
     position: 'absolute',
     top: '0px',
     left: '80px',

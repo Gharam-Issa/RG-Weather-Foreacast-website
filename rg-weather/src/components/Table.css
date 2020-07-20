@@ -1,14 +1,14 @@
 .grid-block{
-    height: 250px;
+    height: auto;
     text-align: center;
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
-    margin-left: 70px;
+    grid-template-columns: auto auto auto auto auto;
+    margin-left: 0px;
 }
 
     .block{
-       height: 150px;
-       
+       height: 212px;
+       cursor: pointer;
 
     }
 
@@ -38,7 +38,7 @@
 .statusImage{
    margin: 5px;
     width:auto;
-    height: 100px;
+    height: 80px;
 
 }
 #todayTemp{
