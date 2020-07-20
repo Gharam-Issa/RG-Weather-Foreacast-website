@@ -24,7 +24,7 @@ const headerStyle ={
     
 }
 
-const logoStyle ={
+const logoStyle = {
 
     //width: '100%',
     height: '85px',

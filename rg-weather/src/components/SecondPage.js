@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Second.css'
+import '../style/Second.css'
 import {Link} from 'react-router-dom';
 
 

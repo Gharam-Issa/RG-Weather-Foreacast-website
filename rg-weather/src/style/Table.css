@@ -1,14 +1,16 @@
 .grid-block{
-    height: auto;
+    width: 100%;
     text-align: center;
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: 20% 20% 20% 20% 20%;
     margin-left: 0px;
-    height: 200px;
+    height: auto;
+    position: sticky;
+    
 }
 
     .block{
-       height: 200px;
+       height: 190px;
        cursor: pointer;
     
     }

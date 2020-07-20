@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import '../Style.css';
+import '../style/Style.css';
 import Table from './Table'
-import './Table.css'
+import '../style/Table.css'
 import axios from 'axios';
 import SecondPage from './SecondPage';
 import Header from './Header';
@@ -166,7 +166,7 @@ export class Main extends Component {
                             <div >
                                 <form onSubmit={this.submit}>
 
-                                    <input type="search" placeholder="Look for your country..." onChange={this.onChange}
+                                    <input id="search" type="search" placeholder="Look for your country..." onChange={this.onChange}
 
                                     ></input>
                                     <input id="searchBtn" type="submit" value="Search" ></input>
@@ -187,8 +187,10 @@ export class Main extends Component {
                             height: '20px'
                         }}></div>
 
-                       
+                       <footer className="footer">
+
                         <Table data={this.state.jsonData} convert={this.convert} />
+                       </footer>
                     </Route>
 
 

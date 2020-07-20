@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Table.css';
+import '../style/Table.css';
 import { Link } from 'react-router-dom';
 
 
