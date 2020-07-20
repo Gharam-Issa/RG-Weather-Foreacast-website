@@ -55,6 +55,7 @@ grid-template-columns: auto auto;
     top:30%;
     vertical-align: middle;
     position: relative;
+    height: 200px;
 }
 #info{
 padding-top: 60px;
