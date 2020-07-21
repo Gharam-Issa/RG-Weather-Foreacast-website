@@ -35,7 +35,7 @@
 .text3{
     font-size: 18px;
     color: #246D3F;
-    margin: 20px 0px;
+    margin: 5px 0px;
 }
 
 .extra-info{
@@ -67,4 +67,3 @@ padding-right: 100px;
     top:10px;
     cursor: pointer;
 }
-

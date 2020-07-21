@@ -36,7 +36,7 @@ export class SecondPage extends Component {
                 
                 <h1 className="text" id="day">{onlyDay}</h1>
 
-                <h3 className="text3" id="date">{onlyDate}</h3>
+                <h3 className="text3" id="date" style={{margin: '5px'}}>{onlyDate}</h3>
 
                 <div id="pic-temp">
                     <img id="pic" src={`${require(`../assets/${this.props.data.list[this.props.index].weather[0].icon}.png`)}`} alt="sun" />
@@ -52,14 +52,16 @@ export class SecondPage extends Component {
 
                 <div className="extra-info">
                     <div id="left">
+                        <h2 className="text2">{"Ground Level: " + this.props.data.list[this.props.index].main.grnd_level}</h2>
                         <h2 className="text2">{"Wind Speed: " +this.props.data.list[this.props.index].wind.speed + "km/h"}</h2>
-                        <h2 className="text2">{"Humidity: " + this.props.data.list[this.props.index].main.humidity+" %"}</h2>
+                        <h2 className="text2">{"Latitude: " + this.props.data.city.coord.lat+"°"}</h2>
                         <h2 className="text2">{"Pressure: " + this.props.data.list[this.props.index].main.pressure}</h2>
                     </div>
                     <div id="right">
                         <h2 className="text2">{"Sea Level: " + this.props.data.list[this.props.index].main.sea_level}</h2>
-                        <h2 className="text2">{"Latitude: " + this.props.data.city.coord.lat+"°"}</h2>
+                        <h2 className="text2">{"Humidity: " + this.props.data.list[this.props.index].main.humidity+" %"}</h2>
                         <h2 className="text2">{"Longitude: " + this.props.data.city.coord.lon +"°"}</h2>
+                        <h2 className="text2">{"Weather Description: " + this.props.data.list[this.props.index].weather[0].description}</h2>
                     </div>
 
 
