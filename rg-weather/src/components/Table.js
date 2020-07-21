@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../style/Table.css';
 import { Link } from 'react-router-dom';
-
+import ClipLoader from "react-spinners/MoonLoader";
 
 export class Table extends Component {
     
@@ -9,7 +9,18 @@ export class Table extends Component {
 
         //var temp  = this.props.data;
         if (!this.props.data.list) {
-            return <span>Loading ...</span>
+            // return <span>Loading ...</span>
+            return <ClipLoader 
+            id="loading"
+            css={{
+                left: '46%',
+                textAligh: 'center',
+                justifySelf:'center',
+                marginBottom: '50px'
+            }}
+            size={80}
+            color={"#246D3F"}
+            />
         }
         return (
             <React.Fragment>

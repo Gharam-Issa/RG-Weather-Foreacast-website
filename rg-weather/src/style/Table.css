@@ -69,3 +69,10 @@ a {
     text-decoration: none;
     background-color: none;
 }
+#loading{
+    text-align: center;
+    justify-content: center;
+    justify-self: center;
+    position: relative;
+    left: 50%;
+}

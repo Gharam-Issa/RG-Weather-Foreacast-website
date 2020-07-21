@@ -7,7 +7,6 @@ import SecondPage from './SecondPage';
 import Header from './Header';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-
 export class Main extends Component {
 
     constructor(props) {
@@ -34,8 +33,8 @@ export class Main extends Component {
 
             tempName: "",
 
-            lon: "31.55",
-            lat: "31.65",
+            lon: "35.1874",
+            lat: "31.7155",
 
             index: {},
         }
@@ -54,9 +53,9 @@ export class Main extends Component {
         try {
             axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${this.state.tempName}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
                 .then(resp => {
-
+                    console.log(resp)
                     this.setState({
-
+                        
                         maxTemp: `${Math.round(resp.data.list[0].main.temp_max)}°`,
                         minTemp: `${Math.round(resp.data.list[0].main.temp_min)}°`,
                         feels: `${Math.round(resp.data.list[0].main.feels_like)}°`,
@@ -110,26 +109,38 @@ export class Main extends Component {
 
     componentDidMount() {
         if (navigator.geolocation) {
+            
             navigator.geolocation.getCurrentPosition((position) => {
+                console.log(position.coords)
                 this.setState({
-                    lon: position.coords.longitude,
-                    lat: position.coords.latitude
+
+                    lon:  position.coords.longitude,
+                    lat: position.coords.latitude,
+
+                })
+
+                
+                
+            })
+            //console.log(this.state.lat,this.state.lon)
+            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${this.state.lat}&lon=${this.state.lon}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
+            .then(resp => {
+                console.log(resp)
+                this.setState({
+                 
+                    maxTemp: `${Math.round(resp.data.list[0].main.temp_max)}°`,
+                    minTemp: `${Math.round(resp.data.list[0].main.temp_min)}°`,
+                    feels: `${Math.round(resp.data.list[0].main.feels_like)}°`,
+                    status: resp.data.list[0].weather[0].main,
+                    date: this.convert(resp.data.list[0].dt),
+                    statusImage: `${require(`../assets/${resp.data.list[0].weather[0].icon}.png`)}`,
+                    windSpeed: `${resp.data.list[0].wind.speed} km/h`,
+                    humidity: ` ${resp.data.list[0].main.humidity} %`,
+                    pressure: resp.data.list[0].main.pressure,
+                    jsonData: resp.data,
+                  
                 })
             })
-            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${this.state.lat}&lon=${this.state.lon}&appid=ad8cc942e17c8f242593e8d4a5bc5eb2&units=metric`)
-                .then(resp => {
-                    this.setState({
-                        maxTemp: `${Math.round(resp.data.list[0].main.temp_max)}°`,
-                        minTemp: `${Math.round(resp.data.list[0].main.temp_min)}°`,
-                        feels: `${Math.round(resp.data.list[0].main.feels_like)}°`,
-                        status: resp.data.list[0].weather[0].main,
-                        date: this.convert(resp.data.list[0].dt),
-                        windSpeed: `${resp.data.list[0].wind.speed} km/h`,
-                        humidity: ` ${resp.data.list[0].main.humidity} %`,
-                        pressure: resp.data.list[0].main.pressure,
-                        jsonData: resp.data,
-                    })
-                })
 
         }
         else {
