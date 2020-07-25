@@ -33,8 +33,8 @@ export class Main extends Component {
 
             tempName: "",
 
-            lon: "35.1874",
-            lat: "31.7155",
+            lon: "-0.118092",
+            lat: "51.509865",
 
             index: {},
         }
@@ -138,8 +138,10 @@ export class Main extends Component {
                     humidity: ` ${resp.data.list[0].main.humidity} %`,
                     pressure: resp.data.list[0].main.pressure,
                     jsonData: resp.data,
-                  
+                    tempName: resp.data.city.name,
+                    name: resp.data.city.name,
                 })
+                //console.log(this.state.name)
             })
 
         }
